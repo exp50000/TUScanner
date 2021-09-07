@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import IITool
+import TUStyle
 
 public class ScannerViewController: UIViewController {
     private let captureSession = AVCaptureSession()
@@ -51,11 +52,11 @@ public class ScannerViewController: UIViewController {
         title = "多功能掃描"
         let closeBtn = UIBarButtonItem(image: UIImage(named: "icPageClose"), style: .plain, target: self, action: #selector(closeVC))
         navigationItem.rightBarButtonItem = closeBtn
-        navigationController?.navigationBar.tintColor = UIColor(red: 47/255.0, green: 60/255.0, blue: 75/255.0, alpha: 1)
+        navigationController?.navigationBar.tintColor = UIColor.dark
     }
     
     private func setupMask() {
-        let mask = ScannerMask(with: view.bounds, maskColor: UIColor(red: 47/255.0, green: 60/255.0, blue: 75/255.0, alpha: 0.7), topSpace: 75)
+        let mask = ScannerMask(with: view.bounds, maskColor: .dark!.withAlphaComponent(0.7), topSpace: 75)
         view.insertSubview(mask, at: 0)
     }
     

@@ -23,10 +23,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "TUScanner",
-            dependencies: [],
-            resources: [
-                .process("Resource/Colors.xcassets")
-            ]),
+            dependencies: []),
         .testTarget(
             name: "TUScannerTests",
             dependencies: ["TUScanner"]),
