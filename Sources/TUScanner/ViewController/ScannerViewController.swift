@@ -1,6 +1,6 @@
 //
 //  ScannerViewController.swift
-//  ActivityScanner
+//  TUScanner
 //
 //  Created by ice on 2021/9/1.
 //
@@ -56,7 +56,7 @@ public class ScannerViewController: UIViewController {
     }
     
     private func setupMask() {
-        let mask = ScannerMask(with: view.bounds, maskColor: .dark!.withAlphaComponent(0.7), topSpace: 75)
+        let mask = ScannerMask(with: view.bounds, maskColor: .dark.withAlphaComponent(0.7), topSpace: 75)
         view.insertSubview(mask, at: 0)
     }
     
@@ -95,7 +95,7 @@ public class ScannerViewController: UIViewController {
 
 extension ScannerViewController {
     public static func newVC() -> ScannerViewController {
-        return ScannerViewController.instantiate(from: "Scanner", bundle: Bundle.module)
+        return ScannerViewController.instantiate(from: "Scanner", bundle: .module)
     }
 }
 

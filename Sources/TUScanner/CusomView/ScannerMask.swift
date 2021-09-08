@@ -1,3 +1,10 @@
+//
+//  ScannerMask.swift
+//  TUScanner
+//
+//  Created by ice on 2021/9/6.
+//
+
 import UIKit
 
 public class ScannerMask: UIView {
