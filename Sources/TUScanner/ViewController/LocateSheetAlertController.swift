@@ -14,6 +14,7 @@ public class LocateSheetAlertController: UIViewController {
     public typealias Action = (BordButton?) -> Void
     public var leftButtonAction: Action?
     public var rightButtonAction: Action?
+    public var canScan = false
     
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var leftButton: BordButton! {
@@ -45,6 +46,8 @@ public class LocateSheetAlertController: UIViewController {
         super.viewDidLoad()
         hero.isEnabled = true
         contentView.hero.modifiers = [.translate(y: 100)]
+        
+        rightButton.isHidden = !canScan
     }
     
     public override func viewDidLayoutSubviews() {

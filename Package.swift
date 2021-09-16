@@ -19,8 +19,10 @@ let package = Package(
         // .package(url: /* package url */, from: "1.0.0"),
         .package(path: "../IITool"), // Local dependencies, must modify when publish
         .package(path: "../TUStyle"),
+        .package(path: "../TUCore"),
         .package(url: "https://github.com/ReactiveX/RxSwift.git", .exact("6.2.0")),
-        .package(url: "https://github.com/HeroTransitions/Hero.git", .upToNextMajor(from: "1.6.1"))
+        .package(url: "https://github.com/HeroTransitions/Hero.git", .upToNextMajor(from: "1.6.1")),
+        .package(url: "https://github.com/malcommac/SwiftDate.git", .upToNextMajor(from: "6.3.1"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -30,7 +32,8 @@ let package = Package(
             dependencies: [
                 "RxSwift",
                 .product(name: "RxCocoa", package: "RxSwift"),
-                "Hero"
+                "Hero",
+                "SwiftDate"
             ]),
         .testTarget(
             name: "TUScannerTests",

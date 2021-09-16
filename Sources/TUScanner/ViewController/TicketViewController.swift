@@ -8,6 +8,8 @@
 import UIKit
 import IITool
 import TUStyle
+import RxSwift
+import RxCocoa
 
 public class TicketViewController: UIViewController {
     @IBOutlet weak var ticketBackgroudView: UIView! {
@@ -22,8 +24,8 @@ public class TicketViewController: UIViewController {
             tagLabel.layer.masksToBounds = true
         }
     }
-    @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
     @IBOutlet weak var qrcodeImageView: UIImageView!
     @IBOutlet weak var qrcodeTitleLabel: UILabel!
     @IBOutlet weak var qrcodeTimeLabel: UILabel!
@@ -34,13 +36,20 @@ public class TicketViewController: UIViewController {
     @IBOutlet weak var endTimeLabel: UILabel!
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var button: BordButton!
+    @IBOutlet weak var closeButton: UIButton!
     
-    public var qrcodeImage: UIImage?
+    public var viewModel = TicketViewModel()
+    
+    private let disposeBag = DisposeBag()
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        qrcodeImageView.image = qrcodeImage
+        hero.isEnabled = true
+        ticketBackgroudView.hero.modifiers = [.scale(0.8)]
+        closeButton.hero.modifiers = [.scale(0.8)]
+        
+        bindViewModel()
     }
     
     @objc @IBAction func closeVC() {
@@ -60,9 +69,56 @@ public class TicketViewController: UIViewController {
     }
 }
 
+private extension TicketViewController {
+    func bindViewModel() {
+        viewModel.title.asDriver()
+            .drive(titleLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.subTitle.asDriver()
+            .drive(subTitleLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.qrcode.asDriver()
+            .drive(qrcodeImageView.rx.image)
+            .disposed(by: disposeBag)
+        viewModel.createTime                                //
+            .subscribe(onNext: { [unowned self] string in
+                qrcodeTimeLabel.text = "產生時間：\(string)"
+            }).disposed(by: disposeBag)
+        viewModel.createTime.asDriver()
+            .map({ "產生時間：\($0)" })
+            .drive(qrcodeTimeLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.oneDayOnly.asDriver()
+            .drive(dashLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        viewModel.oneDayOnly.asDriver()
+            .drive(endDateLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        viewModel.oneDayOnly.asDriver()
+            .drive(endTimeLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        viewModel.beginDay.asDriver()
+            .drive(beginDateLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.beginTime.asDriver()
+            .drive(beginTimeLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.endDay.asDriver()
+            .drive(endDateLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.endTime.asDriver()
+            .drive(endTimeLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.tip.asDriver()
+            .drive(tipLabel.rx.text)
+            .disposed(by: disposeBag)
+    }
+}
+
 extension TicketViewController {
     public static func newVC() -> TicketViewController {
-        return TicketViewController.instantiate(from: "Scanner", bundle: .module)
+        let vc = TicketViewController.instantiate(from: "Scanner", bundle: .module)
+        return vc
     }
 }
 

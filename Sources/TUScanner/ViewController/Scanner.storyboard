@@ -317,17 +317,18 @@
                         <outlet property="beginDateLabel" destination="3HL-bK-Y2i" id="GI1-q4-Nh6"/>
                         <outlet property="beginTimeLabel" destination="XEy-Ng-fCZ" id="NGj-Il-eJV"/>
                         <outlet property="button" destination="FKq-3G-YhS" id="oFc-UR-Jap"/>
+                        <outlet property="closeButton" destination="pqJ-Dr-30R" id="syr-vO-jrq"/>
                         <outlet property="dashLabel" destination="9VX-yd-965" id="CH8-rh-0b9"/>
                         <outlet property="endDateLabel" destination="yRD-hE-Z4Q" id="xSa-ku-kDl"/>
                         <outlet property="endTimeLabel" destination="VjS-lO-9Xa" id="YIf-q4-yww"/>
-                        <outlet property="mainLabel" destination="3kT-9N-RIX" id="VTQ-oj-1cp"/>
                         <outlet property="qrcodeImageView" destination="bHe-JP-n79" id="Pmj-Bm-TNC"/>
                         <outlet property="qrcodeTimeLabel" destination="FpZ-rI-7nW" id="hYf-e6-5Vr"/>
                         <outlet property="qrcodeTitleLabel" destination="1Ne-GF-cPZ" id="8lC-rY-vZK"/>
+                        <outlet property="subTitleLabel" destination="2Bi-Dv-Kud" id="w7y-Cx-aZ4"/>
                         <outlet property="tagLabel" destination="4hB-Gs-USN" id="yR3-SZ-6Q8"/>
                         <outlet property="ticketBackgroudView" destination="XeK-RA-TqV" id="wk7-wV-jAI"/>
                         <outlet property="tipLabel" destination="aDY-Oe-CNs" id="WmT-N4-Egz"/>
-                        <outlet property="titleLabel" destination="2Bi-Dv-Kud" id="w7y-Cx-aZ4"/>
+                        <outlet property="titleLabel" destination="3kT-9N-RIX" id="VTQ-oj-1cp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ub0-dK-WaN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
