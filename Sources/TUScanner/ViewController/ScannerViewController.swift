@@ -111,5 +111,10 @@ extension ScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         }
         
         readCallback?(decode)
+        closeVC()
     }
+}
+
+public extension Notification.Name {
+    static let showCheckingScanner = Notification.Name("showCheckingQRCodeScanner")
 }

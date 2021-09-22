@@ -45,10 +45,6 @@ public class TicketViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        hero.isEnabled = true
-        ticketBackgroudView.hero.modifiers = [.scale(0.8)]
-        closeButton.hero.modifiers = [.scale(0.8)]
-        
         bindViewModel()
     }
     
@@ -61,11 +57,11 @@ public class TicketViewController: UIViewController {
     }
     
     @IBAction func buttonAction() {
-        if isModal {
-            dismiss(animated: true, completion: nil)
-        } else {
-            navigationController?.popViewController(animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            NotificationCenter.default.post(name: .showCheckingScanner, object: nil, userInfo: ["eventid": self?.viewModel.id ?? -1])
         }
+        
+        closeVC()
     }
 }
 
@@ -111,6 +107,17 @@ private extension TicketViewController {
             .disposed(by: disposeBag)
         viewModel.tip.asDriver()
             .drive(tipLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.status
+            .observe(on: MainScheduler.instance)
+            .subscribe (onNext: { [unowned self] status in
+                switch status {
+                case .processing:
+                    showLoading(true)
+                default:
+                    hideLoading()
+                }
+            })
             .disposed(by: disposeBag)
     }
 }

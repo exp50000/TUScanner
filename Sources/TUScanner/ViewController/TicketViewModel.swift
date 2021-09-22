@@ -12,6 +12,7 @@ import UIKit.UIImage
 import SwiftDate
 import TUStyle
 import TUCore
+import IITool
 
 public class TicketViewModel {
     public let title = BehaviorRelay<String>(value: "")
@@ -24,6 +25,7 @@ public class TicketViewModel {
     public let endDay = BehaviorRelay<String>(value: "")
     public let endTime = BehaviorRelay<String>(value: "")
     public let tip = BehaviorRelay<String>(value: "")
+    public let status = BehaviorRelay<APIStatus>(value: .idle)
     
     private(set) public var id: Int?
     
@@ -32,7 +34,16 @@ public class TicketViewModel {
     public init() {
     }
     
-    public func bind(with model: ActivityAPIModel.CheckingPass) {
+    public init(with model: ActivityAPIModel.CheckingPass?) {
+        bind(with: model)
+    }
+    
+    public func bind(with model: ActivityAPIModel.CheckingPass?) {
+        guard let model = model else {
+            tip.accept("-")
+            return
+        }
+        
         id = model.EventID
         title.accept(model.Title ?? "")
         subTitle.accept(model.SubTitle ?? "")
