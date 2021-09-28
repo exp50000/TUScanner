@@ -48,6 +48,18 @@ public class TicketViewController: UIViewController {
         bindViewModel()
     }
     
+    public override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    public override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .portrait
+    }
+    
     @objc @IBAction func closeVC() {
         if isModal {
             dismiss(animated: true, completion: nil)
@@ -57,8 +69,9 @@ public class TicketViewController: UIViewController {
     }
     
     @IBAction func buttonAction() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            NotificationCenter.default.post(name: .showCheckingScanner, object: nil, userInfo: ["eventid": self?.viewModel.id ?? -1])
+        let id = viewModel.id
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            NotificationCenter.default.post(name: .tuTicketScanButtonAction, object: nil, userInfo: ["eventid": id ?? -1])
         }
         
         closeVC()
@@ -129,3 +142,6 @@ extension TicketViewController {
     }
 }
 
+public extension Notification.Name {
+    static let tuTicketScanButtonAction = Notification.Name("tuTicketScanButtonAction")
+}

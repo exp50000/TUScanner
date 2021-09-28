@@ -48,11 +48,24 @@ public class LocateSheetAlertController: UIViewController {
         contentView.hero.modifiers = [.translate(y: 100)]
         
         rightButton.isHidden = !canScan
+        rightButton.isHidden = true
     }
     
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         contentViewRoundCorners()
+    }
+    
+    public override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    public override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .portrait
     }
     
     private func contentViewRoundCorners() {

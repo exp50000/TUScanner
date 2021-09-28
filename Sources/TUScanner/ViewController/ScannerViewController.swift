@@ -40,6 +40,18 @@ public class ScannerViewController: UIViewController {
         stopReading()
     }
     
+    public override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    public override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .portrait
+    }
+    
     @objc func closeVC() {
         if isModal {
             dismiss(animated: true, completion: nil)
