@@ -75,7 +75,7 @@ public class TicketViewModel {
             let startTimeString = startDateInRegion.formatter(format: "HH:mm").string(from: start)
             let endTimeString = endDateInRegion.formatter(format: "HH:mm").string(from: end)
             
-            if start.compare(toDate: end, granularity: .day) == .orderedSame {
+            if startDateInRegion.compare(toDate: endDateInRegion, granularity: .day) == .orderedSame {
                 oneDayOnly.accept(true)
                 beginTime.accept("\(startTimeString)~\(endTimeString)")
             } else {
