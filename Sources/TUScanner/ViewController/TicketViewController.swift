@@ -45,6 +45,7 @@ public class TicketViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        ticketBackgroudView.isHidden = true
         bindViewModel()
     }
     
@@ -127,6 +128,9 @@ private extension TicketViewController {
                 switch status {
                 case .processing:
                     showLoading(true)
+                    self.ticketBackgroudView.isHidden = true
+                case .done(_, _):
+                    self.ticketBackgroudView.isHidden = false
                 default:
                     hideLoading()
                 }
