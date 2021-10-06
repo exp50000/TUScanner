@@ -18,7 +18,7 @@ public class TicketViewController: UIViewController {
             ticketBackgroudView.layer.masksToBounds = true
         }
     }
-    @IBOutlet weak var tagLabel: UILabel! {
+    @IBOutlet weak var tagLabel: PaddingLabel! {
         didSet {
             tagLabel.layer.cornerRadius = 3
             tagLabel.layer.masksToBounds = true
@@ -121,6 +121,18 @@ private extension TicketViewController {
             .disposed(by: disposeBag)
         viewModel.tip.asDriver()
             .drive(tipLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.tagColor.asDriver()
+            .drive(onNext: { [unowned self] color in
+                subTitleLabel.textColor = color
+                tagLabel.backgroundColor = color
+            })
+            .disposed(by: disposeBag)
+        viewModel.tagTitle.asDriver()
+            .drive(onNext: { [unowned self] string in
+                tagLabel.text = string
+                tagLabel.isHidden = string.isEmpty
+            })
             .disposed(by: disposeBag)
         viewModel.status
             .observe(on: MainScheduler.instance)

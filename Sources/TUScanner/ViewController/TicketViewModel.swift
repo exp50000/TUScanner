@@ -26,6 +26,8 @@ public class TicketViewModel {
     public let endTime = BehaviorRelay<String>(value: "")
     public let tip = BehaviorRelay<String>(value: "")
     public let status = BehaviorRelay<APIStatus>(value: .idle)
+    public let tagColor = BehaviorRelay<UIColor>(value: .activityGray)
+    public let tagTitle = BehaviorRelay<String>(value: "")
     
     private(set) public var id: Int?
     
@@ -48,6 +50,8 @@ public class TicketViewModel {
         title.accept(model.Title ?? "")
         subTitle.accept(model.SubTitle ?? "")
         tip.accept(model.Salutatory ?? "")
+        tagColor.accept(getActivityColor(model.ActivityType ?? .unknown))
+        tagTitle.accept(getActivityTitle(model.ActivityType ?? .unknown))
         
         if let dateInRegion = model.CheckingDatetime?.toDate(region: .current) {
             let date = dateInRegion.date
@@ -83,6 +87,34 @@ public class TicketViewModel {
                 beginTime.accept(startTimeString)
                 endTime.accept(endTimeString)
             }
+        }
+    }
+    
+    private func getActivityColor(_ type: ActivityAPIModel.CheckingPass.`Type`) -> UIColor {
+        switch type {
+        case .annualParty:
+            return .activityYellow
+        case .gamania:
+            return .activityOrange
+        case .epidemicPrevention:
+            return .activityRed
+        default:
+            return .activityGray
+        }
+    }
+    
+    private func getActivityTitle(_ type: ActivityAPIModel.CheckingPass.`Type`) -> String {
+        switch type {
+        case .annualParty:
+            return "尾牙"
+        case .gamania:
+            return "全局總動員"
+        case .epidemicPrevention:
+            return "報到"
+        case .none:
+            return "報到"
+        default:
+            return ""
         }
     }
 }
