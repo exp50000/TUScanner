@@ -9,6 +9,8 @@ import UIKit
 import AVFoundation
 import IITool
 import TUStyle
+import RxSwift
+import RxRelay
 
 public class ScannerViewController: UIViewController {
     private let captureSession = AVCaptureSession()
@@ -20,6 +22,9 @@ public class ScannerViewController: UIViewController {
     
     public var qrcodeImage: UIImage?
     
+    public let status = BehaviorRelay<APIStatus>(value: .idle)
+    private let disposeBag = DisposeBag()
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,6 +33,20 @@ public class ScannerViewController: UIViewController {
         setupCaptureSession()
         
         qrCodeImageView.image = qrcodeImage
+        
+        status
+            .observe(on: MainScheduler.instance)
+            .subscribe (onNext: { [unowned self] status in
+                switch status {
+                case .processing:
+                    break
+                case .done(_, _):
+                    closeVC()
+                default:
+                    startReading()
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -123,7 +142,6 @@ extension ScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         }
         
         readCallback?(decode)
-        closeVC()
     }
 }
 
