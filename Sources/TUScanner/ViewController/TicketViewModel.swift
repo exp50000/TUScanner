@@ -33,7 +33,11 @@ public class TicketViewModel {
     
     private let disposeBag = DisposeBag()
     
-    public init() {
+    init() {
+    }
+    
+    public init(_ eventId: Int) {
+        id = eventId
     }
     
     public init(with model: ActivityAPIModel.CheckingPass?) {

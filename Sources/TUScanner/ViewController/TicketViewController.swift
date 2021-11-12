@@ -144,6 +144,7 @@ private extension TicketViewController {
                 case .done(_, _):
                     self.ticketBackgroudView.isHidden = false
                 default:
+                    self.ticketBackgroudView.isHidden = false
                     hideLoading()
                 }
             })
