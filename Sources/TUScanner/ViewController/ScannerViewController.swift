@@ -81,6 +81,15 @@ public class ScannerViewController: UIViewController {
     
     private func setupNavigationBar() {
         title = "多功能掃描"
+        
+        if #available(iOS 15, *) {
+            let app = UINavigationBarAppearance()
+            app.configureWithOpaqueBackground()
+            app.shadowColor = .clear
+            navigationController?.navigationBar.standardAppearance = app
+            navigationController?.navigationBar.scrollEdgeAppearance = app
+        }
+        
         let closeBtn = UIBarButtonItem(image: UIImage(named: "icPageClose"), style: .plain, target: self, action: #selector(closeVC))
         navigationItem.rightBarButtonItem = closeBtn
         navigationController?.navigationBar.tintColor = UIColor.dark
