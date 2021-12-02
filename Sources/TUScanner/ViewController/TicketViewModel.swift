@@ -28,6 +28,7 @@ public class TicketViewModel {
     public let status = BehaviorRelay<APIStatus>(value: .idle)
     public let tagColor = BehaviorRelay<UIColor>(value: .activityGray)
     public let tagTitle = BehaviorRelay<String>(value: "")
+    public let order = BehaviorRelay<String?>(value: nil)
     
     private(set) public var id: Int?
     
@@ -56,6 +57,7 @@ public class TicketViewModel {
         tip.accept(model.Salutatory ?? "")
         tagColor.accept(getActivityColor(model.ActivityType ?? .unknown))
         tagTitle.accept(getActivityTitle(model.ActivityType ?? .unknown))
+        order.accept(model.Order)
         
         if let dateInRegion = model.CheckingDatetime?.toDate(region: .current) {
             let date = dateInRegion.date

@@ -37,6 +37,7 @@ public class TicketViewController: UIViewController {
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var button: BordButton!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var orderLabel: UILabel!
     
     public var viewModel = TicketViewModel()
     
@@ -149,6 +150,14 @@ private extension TicketViewController {
                 }
             })
             .disposed(by: disposeBag)
+        viewModel.order
+            .observe(on: MainScheduler.instance)
+            .subscribe (onNext: { [unowned self] order in
+                self.orderLabel.text = "(No.\(order ?? ""))"
+                self.orderLabel.isHidden = order == nil
+            })
+            .disposed(by: disposeBag)
+
     }
 }
 
