@@ -82,6 +82,8 @@ public class ScannerViewController: UIViewController {
     private func setupNavigationBar() {
         title = "多功能掃描"
         
+        navigationController?.navigationBar.isTranslucent = false
+        
         if #available(iOS 15, *) {
             let app = UINavigationBarAppearance()
             app.configureWithOpaqueBackground()
