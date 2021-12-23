@@ -153,7 +153,7 @@ private extension TicketViewController {
         viewModel.order
             .observe(on: MainScheduler.instance)
             .subscribe (onNext: { [unowned self] order in
-                self.orderLabel.text = "(No.\(order ?? ""))"
+                self.orderLabel.text = "( No. \(order ?? "") )"
                 self.orderLabel.isHidden = order == nil
             })
             .disposed(by: disposeBag)
