@@ -17,9 +17,9 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(url: "https://github.com/iceboxi/IITool.git", .exact("1.0.0")),
-        .package(url: "https://github.com/iceboxi/TUStyle.git", .exact("1.0.0")),
-        .package(url: "https://github.com/iceboxi/TUCore.git", .exact("1.0.0")),
+        .package(url: "https://github.com/iceboxi/IITool.git", .exact("1.0.1")),
+        .package(url: "https://github.com/iceboxi/TUStyle.git", .exact("1.0.1")),
+        .package(url: "https://github.com/iceboxi/TUCore.git", .exact("1.0.1")),
         .package(url: "https://github.com/ReactiveX/RxSwift.git", .exact("6.2.0")),
         .package(url: "https://github.com/HeroTransitions/Hero.git", .upToNextMajor(from: "1.6.1")),
         .package(url: "https://github.com/malcommac/SwiftDate.git", .upToNextMajor(from: "6.3.1"))
