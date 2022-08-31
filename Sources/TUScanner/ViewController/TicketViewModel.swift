@@ -114,7 +114,7 @@ public class TicketViewModel {
         case .annualParty:
             return "尾牙"
         case .gamania:
-            return "全局總動員"
+            return "全橘總動員"
         case .epidemicPrevention:
             return "報到"
         case .none:
